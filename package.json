@@ -1,0 +1,16 @@
+{
+  "name": "scraperLyrify",
+  "author": "Eugene Didenko <eugene.d@reply.io>",
+  "version": "0.0.1",
+  "description": "Genius lyrics scraper for lyrify desktop",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "mongodb": "^3.1.10",
+    "nodemon": "^1.18.9",
+    "puppeteer": "^1.11.0"
+  }
+}
