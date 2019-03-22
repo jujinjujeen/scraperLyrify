@@ -1,16 +1,19 @@
 {
-  "name": "scraperLyrify",
-  "author": "Eugene Didenko <eugene.d@reply.io>",
+  "name": "scraperlyrify",
+  "author": "Eugene Didenko <eugeneddenko@gmail.com>",
   "version": "0.0.1",
-  "description": "Genius lyrics scraper for lyrify desktop",
+  "description": "Lyrics scraper for lyrify desktop",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "mongodb": "^3.1.10",
-    "nodemon": "^1.18.9",
     "puppeteer": "^1.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
