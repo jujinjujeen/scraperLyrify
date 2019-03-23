@@ -1,19 +1,20 @@
-const getText = require('./app/getLyrics');
+const getLyrics = require('./app/getLyrics');
 const express = require('express');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.get('/lyrics/:band/:song', async (req, res) => {
     const { band, song } = req.params;
-    const lyrics = await getText(`${band} ${song}`);
-    res.send(lyrics);
+    console.log(band, song);
+    const lyrics = await getLyrics(`${band} ${song}`);
+    if (lyrics) {
+        res.send(lyrics);
+    } else {
+        res
+            .status(404)
+            .send('Not Found!')
+    }
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-// getText('Massive Attack One Love').then((text) => {
-//     console.log(text);
-//     process.exit();
-// });
-
-
