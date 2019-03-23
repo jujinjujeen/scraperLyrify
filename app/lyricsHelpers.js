@@ -20,7 +20,7 @@ const getLyricsGoogle = async (browser, song) => {
     await page.waitForSelector('g-expandable-content');
     const text = await page.evaluate(() => {
         const div = document.createElement('div');
-        div.innerHTML = document.querySelectorAll('g-expandable-content')[1].innerHTML.replace(/<br>/g, '\r\n');
+        div.innerHTML = document.querySelectorAll('g-expandable-content')[1].innerHTML.replace(/<\/span>/g, '</span>\r\n');
         return div.innerText;
     });
     return { type: 'google', text};
