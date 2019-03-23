@@ -1,13 +1,13 @@
 const getPage = async (browser) => {
     let page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setViewport({ width: 1500, height: 800 });
     await page.setRequestInterception(true);
 
     page.on('request', (req) => {
-        if (req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image') {
+        const type = req.resourceType();
+        if (type == 'stylesheet' || type == 'font' || type == 'image') {
             req.abort();
-        }
-        else {
+        } else {
             req.continue();
         }
     });

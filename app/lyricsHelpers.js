@@ -17,8 +17,11 @@ const getLyricsGoogle = async (browser, song) => {
     const page = await getPage(browser);
     const query = song.toLowerCase().replace(/ /gi, '+');
     await page.goto(`https://www.google.com/search?q=${query}`);
+    await page.waitForSelector('g-expandable-content');
     const text = await page.evaluate(() => {
-        return document.querySelectorAll('g-expandable-content')[1].innerText;
+        const div = document.createElement('div');
+        div.innerHTML = document.querySelectorAll('g-expandable-content')[1].innerHTML.replace(/<br>/g, '\r\n');
+        return div.innerText;
     });
     return { type: 'google', text};
 }
@@ -30,7 +33,12 @@ const getLyricsMusixmatch = async (browser, song) => {
     await page.click('.track-card');
     await page.waitForSelector('.mxm-lyrics');
     const text = await page.evaluate(() => {
-        return document.querySelector('.mxm-lyrics span').innerText;
+        const el = document.querySelector('.mxm-lyrics .mxm-lyrics span').textContent;
+        const gt = el.indexOf('googletag'), end = el.indexOf('});');
+        if(gt !== -1 && end !== -1) {
+            return el.slice(0, gt) + el.slice(end+3);
+        }
+        return el;
     });
     return { type: 'musixmatch', text};
 }
