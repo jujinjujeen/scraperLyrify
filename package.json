@@ -1,0 +1,20 @@
+{
+  "name": "scraperlyrify",
+  "author": "Eugene Didenko <eugeneddenko@gmail.com>",
+  "version": "0.0.1",
+  "description": "Lyrics scraper for lyrify desktop",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "express": "^4.16.4",
+    "puppeteer": "^1.11.0",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
