@@ -5,6 +5,9 @@
   "description": "Lyrics scraper for lyrify desktop",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "11.10.0"
+  },
   "scripts": {
     "start": "nodemon index.js"
   },
