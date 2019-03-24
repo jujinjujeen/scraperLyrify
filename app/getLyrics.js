@@ -14,7 +14,7 @@ const getLyrics = async (song) => {
     try {
         const lyrics = await getLyricsFromDb(song);
         if (!lyrics) {
-            const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+            const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
             const { text, type } = await raceSuccess([
                 getLyricsGenius(browser, song),
                 getLyricsGoogle(browser, song),
