@@ -1,6 +1,6 @@
 const { promisifyAll } = require('bluebird');
 const redis = promisifyAll(require("redis"));
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_URL);
 
 client.on('connect', function() {
     console.log('Redis client connected');
