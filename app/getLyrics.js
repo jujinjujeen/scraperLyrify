@@ -20,7 +20,7 @@ const getLyrics = async (song) => {
                 getLyricsGoogle(browser, song),
                 getLyricsMusixmatch(browser, song)
             ]);
-            console.log(`got lyrics from ${type}`);
+            console.log(`Got lyrics from: ${type}`);
             setLyricsToDb(song, text);
             await browser.close();
             return text;
