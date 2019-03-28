@@ -1,4 +1,3 @@
-const puppeteer = require('puppeteer');
 const raceSuccess = require('./raceSuccess');
 
 const {
@@ -10,23 +9,20 @@ const {
 } = require('./lyricsHelpers');
 
 
-const getLyrics = async (song) => {
+const getLyrics = async (browser, song) => {
     try {
         const lyrics = await getLyricsFromDb(song);
-        if (!lyrics) {
-            const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-            const { text, type } = await raceSuccess([
-                getLyricsGenius(browser, song),
-                getLyricsGoogle(browser, song),
-                getLyricsMusixmatch(browser, song)
-            ]);
-            console.log(`Got lyrics from: ${type}`);
-            setLyricsToDb(song, text);
-            await browser.close();
-            return text;
-        }
+        if (lyrics) return lyrics;
 
-        return lyrics;
+        const { text, type } = await raceSuccess([
+            getLyricsGenius(browser, song),
+            getLyricsGoogle(browser, song),
+            getLyricsMusixmatch(browser, song)
+        ]);
+
+        console.log(`Got lyrics from: ${type}`);
+        setLyricsToDb(song, text);
+        return text;
     } catch (e) {
         console.log('Problem occured fetching lyrics:', e)
     }
