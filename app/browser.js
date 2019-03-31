@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 const buildBrowser = async () => {
-    return await puppeteer.launch({
+    const browserInstance = await puppeteer.launch({
         args: [
             '--no-sandbox', 
             '--disable-setuid-sandbox',
@@ -10,6 +10,7 @@ const buildBrowser = async () => {
             '--disable-dev-shm-usage'
         ] 
     });
+    return browserInstance;
 };
 
 module.exports = {
